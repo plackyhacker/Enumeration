@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace EnumEDR
 {
-    public static class Program
+        public static class Program
     {
         public static void Main(string[] args)
         {
@@ -26,23 +26,21 @@ namespace EnumEDR
             else
                 driverPath = "\\\\" + hostName + "\\C$\\windows\\sysnative\\drivers";
 
+            // collect the .sys files in a oner
+            string[] sysFiles = Directory.GetFiles(driverPath, "*.sys", SearchOption.TopDirectoryOnly);
+
             // search for EDR driver files
-            foreach(KeyValuePair<string, string[]> kvp in edrList)
+            foreach (KeyValuePair<string, string[]> kvp in edrList)
             {
                 for(int i = 0; i <  kvp.Value.Length; i++)
                 {
-                    try
+                    if (sysFiles.Contains(driverPath + "\\" + kvp.Value[i]))
                     {
-                        if (Directory.GetFiles(driverPath, kvp.Value[i], SearchOption.TopDirectoryOnly).Length != 0)
-                        {
-                            // if we find an EDR we can stop looking
-                            Console.WriteLine("{0} is on the host.", kvp.Key);
-                            edrFound = true;
-                            break;
-                        }
+                        // if we find an EDR we can stop looking
+                        Console.WriteLine("{0} is on the host.", kvp.Key);
+                        edrFound = true;
+                        break;
                     }
-                    // in case we don't have permission
-                    catch {  }
                 }
                 if (edrFound)
                     break;
@@ -51,6 +49,10 @@ namespace EnumEDR
             // none were found
             if(!edrFound)
                 Console.WriteLine("No EDR products were found.");
+
+#if DEBUG
+            Console.ReadKey();
+#endif
         }
 
         private static Dictionary<string, string[]> GetEDRList()

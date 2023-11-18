@@ -1,6 +1,6 @@
 # Enumeration
 
-A small collection of .Net assemblies that can be used to enumerate a host. It is better to load these in to memory than run them from disk.
+A small collection of .Net assemblies that can be used to enumerate a host. It is better to load these in to memory than run them from disk. Or incorporate them in the C2 beacon if you have a .Net C2.
 
 [EnumEDR](https://github.com/plackyhacker/Enumeration/tree/main/EnumEDR)
 

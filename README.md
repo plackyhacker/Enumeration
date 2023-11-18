@@ -14,7 +14,4 @@ EnumEDR.exe <host>
 
 **Example**
 
-```
-EnumEDR.exe
-McAfee is on the host.
-```
+<img width="924" alt="Screenshot 2023-11-18 at 15 15 29" src="https://github.com/plackyhacker/Enumeration/assets/42491100/b42c241c-26a9-4e3b-b2e9-eed8d647e9dd">
